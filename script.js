@@ -1,18 +1,21 @@
 'use strict';
 
-const diceDisplay = document.querySelector(`.dice`);
-const diceRoleBtn = document.querySelector(`.btn--roll`);
-const holdBtn = document.querySelector(`.btn--hold`);
-let p1Total = document.getElementById(`score--0`).nodeValue;
-let p1Current = document.getElementById(`current--0`).nodeValue;
-let p2Total = document.getElementById(`score--1`).nodeValue;
-let p2Current = document.getElementById(`current--1`).nodeValue;
+const diceEl = document.querySelector(`.dice`);
+const btnRoll = document.querySelector(`.btn--roll`);
+const btnHold = document.querySelector(`.btn--hold`);
+const btnNew = document.querySelector(`.btn--new`);
+const score0El = document.getElementById(`score--0`);
+const score1El = document.getElementById(`score--1`);
+const current0El = document.getElementById(`current--0`);
+const current1El = document.getElementById(`current--1`);
+const player0El = document.querySelector(`.player--0`);
+const player1El = document.querySelector(`.player--1`);
 
-/* p1Current.textContent = 0;
-p1Total.textContent = 0;
-p2Current.textContent = 0;
-p2Total.textContent = 0; */
-diceDisplay.classList.add(`hidden`);
+diceEl.classList.add(`hidden`);
+
+const scores = [0, 0];
+let currentScore = 0;
+let activePlayer = 0;
 
 const diceRoll = function () {
   const roll = Math.trunc(Math.random() * 6) + 1;
@@ -23,19 +26,28 @@ const playerSwitch = function () {
   console.log(`Next Player`);
 };
 
-diceRoleBtn.addEventListener(`click`, function () {
-  const currentRole = diceRoll();
-  p1Current += currentRole;
-  console.log(p1Current);
-  if (currentRole === 1) {
-    console.log(`Next Player`);
+btnRoll.addEventListener(`click`, function () {
+  const dice = diceRoll();
+  diceEl.classList.remove(`hidden`);
+  diceEl.src = `dice-${dice}.png`;
+  if (dice !== 1) {
+    currentScore += dice;
+    document.getElementById(`current--${activePlayer}`).textContent =
+      currentScore;
   } else {
-    document.getElementById(`current--0`).textContent = p1Current;
+    document.getElementById(`current--${activePlayer}`).textContent = 0;
+    currentScore = 0;
+    activePlayer = activePlayer === 0 ? 1 : 0;
+    player0El.classList.toggle(`player--active`);
+    player1El.classList.toggle(`player--active`);
   }
 });
 
-holdBtn.addEventListener(`click`, function () {
-  console.log(`Next Player`);
-  p1Total = p1Current;
-  document.getElementById(`score--0`).textContent = p1Total;
+btnHold.addEventListener(`click`, function () {
+  document.getElementById(`score--${activePlayer}`).textContent = currentScore;
+  document.getElementById(`current--${activePlayer}`).textContent = 0;
+  currentScore = 0;
+  activePlayer = activePlayer === 0 ? 1 : 0;
+  player0El.classList.toggle(`player--active`);
+  player1El.classList.toggle(`player--active`);
 });
