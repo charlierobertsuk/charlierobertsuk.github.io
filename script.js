@@ -44,8 +44,9 @@ btnRoll.addEventListener(`click`, function () {
 });
 
 btnHold.addEventListener(`click`, function () {
-  document.getElementById(`score--${activePlayer}`).textContent = currentScore;
-  document.getElementById(`current--${activePlayer}`).textContent = 0;
+  scores[activePlayer] = currentScore;
+  document.getElementById(`current--${activePlayer}`).textContent =
+    currentScore;
   currentScore = 0;
   activePlayer = activePlayer === 0 ? 1 : 0;
   player0El.classList.toggle(`player--active`);
