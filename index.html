@@ -27,9 +27,36 @@
       </section>
 
       <img src="dice-5.png" alt="Playing dice" class="dice" />
-      <button class="btn btn--new">🔄 New game</button>
-      <button class="btn btn--roll">🎲 Roll dice</button>
+      <button class="btn btn--new">🔄 New Game</button>
+      <button class="btn show-modal btn--how">❓ How To Play</button>
+      <button class="btn btn--roll">🎲 Roll Dice</button>
       <button class="btn btn--hold">📥 Hold</button>
+
+      <div class="modal hidden">
+        <button class="close-modal">&times;</button>
+        <h1>How To Play Charlie's Pig Game!</h1>
+        <br />
+        <p>
+          Each turn, a player repeatedly rolls a die until the chosen number is
+          rolled or the player decides to "hold": If the player rolls a 1 at the
+          beginning of the game, they score nothing and it becomes the next
+          player's turn. <br />
+          <br />
+          If the player rolls any other number, it is added to their turn total
+          and the player's turn continues. If a player chooses to "hold", their
+          turn total is added to their score, and it becomes the next player's
+          turn. The first player to score 100 or more points wins. <br />
+          <br />
+          For example, the first player, Player 1, begins a turn and rolls a 5.
+          Player 1 could hold and score 5 points, but chooses to roll again.
+          Player 1 rolls a 2, and could hold with a turn total of 7 points, but
+          chooses to roll again. Player 1 rolls a 1, and must end their turn
+          without scoring. The next player, Player 2, rolls the sequence 4, 5,
+          3, 5, 6, after which they choose to hold, and adds their turn total of
+          23 points to their score.
+        </p>
+      </div>
+      <div class="overlay hidden"></div>
     </main>
     <script src="script.js"></script>
   </body>

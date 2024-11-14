@@ -4,12 +4,25 @@ const diceEl = document.querySelector(`.dice`);
 const btnRoll = document.querySelector(`.btn--roll`);
 const btnHold = document.querySelector(`.btn--hold`);
 const btnNew = document.querySelector(`.btn--new`);
+const btnHow = document.querySelector(`.btn--how`);
 const score0El = document.getElementById(`score--0`);
 const score1El = document.getElementById(`score--1`);
 const current0El = document.getElementById(`current--0`);
 const current1El = document.getElementById(`current--1`);
 const player0El = document.querySelector(`.player--0`);
 const player1El = document.querySelector(`.player--1`);
+const modal = document.querySelector(`.modal`);
+const overlay = document.querySelector(`.overlay`);
+const btnCloseModal = document.querySelector(`.close-modal`); // querySelector only selects the first one
+const btnOpenModal = document.querySelectorAll(`.show-modal`);
+const closeModal = function () {
+  modal.classList.add(`hidden`);
+  overlay.classList.add(`hidden`);
+};
+const openModal = function () {
+  modal.classList.remove(`hidden`);
+  overlay.classList.remove(`hidden`);
+};
 let scores, currentScore, activePlayer, playing;
 
 const reset = function () {
@@ -85,6 +98,17 @@ btnNew.addEventListener(`click`, function () {
   reset();
 });
 
-reset();
+btnHow.addEventListener(`click`, function () {
+  console.log(btnOpenModal);
+  openModal();
+  btnCloseModal.addEventListener(`click`, closeModal);
+  overlay.addEventListener(`click`, closeModal);
 
-//test commit
+  // e (event) is the object of what key was pressed
+  document.addEventListener(`keydown`, function (e) {
+    //console.log(e.key);
+    if (e.key === `Escape` && !modal.classList.contains(`hidden`)) closeModal();
+  });
+});
+
+reset();
